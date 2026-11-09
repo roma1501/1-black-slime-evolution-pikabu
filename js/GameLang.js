@@ -332,3 +332,9 @@ Object.assign(LANG_STRINGS.en, {
 
     'hud.offerDefault': 'Starter pack',
 });
+
+// Название площадки (GAME_TITLES в Constants.js) важнее строки 'title' игры: Lang.js ставит его раньше этого файла.
+(() => {
+    const t = typeof GAME_TITLES !== 'undefined' && GAME_TITLES ? /** @type {Record<string, any>} */ (GAME_TITLES)[String(GAME_PLATFORM)] : null;
+    if (typeof t === 'string' && t) for (const c of Object.keys(LANG_STRINGS)) /** @type {Record<string, Record<string, string>>} */ (LANG_STRINGS)[c].title = t;
+})();
